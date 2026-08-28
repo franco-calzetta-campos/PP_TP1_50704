@@ -6,6 +6,7 @@ Programa demostrativo de un modelo a escala de Eventos Universitarios en el que 
 ## Clonar y construír
 En terminal, con git instalado, ejecutar
 > git clone https://github.com/franco-calzetta-campos/PP_TP1_50704
+
 Luego, para compilar y ejecutar:
 - Si está en windows
   - Ejecutar "build.bat" (dentro o fuera de la terminal)
