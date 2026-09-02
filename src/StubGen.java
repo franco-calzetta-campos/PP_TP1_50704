@@ -6,23 +6,11 @@ public class StubGen {
     public static Estudiante[] crearEstudiantes() {
         Estudiante[] estudiantes = new Estudiante[5];
 
-        estudiantes[0] = new Estudiante();
-        estudiantes[1] = new Estudiante();
-        estudiantes[2] = new Estudiante();
-        estudiantes[3] = new Estudiante();
-        estudiantes[4] = new Estudiante();
-
-        estudiantes[0].setNombre("Alvaro Alvarez");
-        estudiantes[1].setNombre("Bernardo Beltran");
-        estudiantes[2].setNombre("Camila Canales");
-        estudiantes[3].setNombre("Diego D'Avalos");
-        estudiantes[4].setNombre("Ernestina Estevanez");
-
-        estudiantes[0].setLegajo("50501");
-        estudiantes[1].setLegajo("50502");
-        estudiantes[2].setLegajo("50503");
-        estudiantes[3].setLegajo("50504");
-        estudiantes[4].setLegajo("50505");
+        estudiantes[0] = new Estudiante("Alvaro Alvarez", "50501");
+        estudiantes[0] = new Estudiante("Bernardo Beltran", "50502");
+        estudiantes[0] = new Estudiante("Camila Canales", "50503");
+        estudiantes[0] = new Estudiante("Diego D'Avalos", "50504");
+        estudiantes[0] = new Estudiante("Ernestina Estevanez", "50505");
 
         return estudiantes;
     }
@@ -52,26 +40,12 @@ public class StubGen {
     }
 
     public static Sala generarSala(int id) {
-        Sala sala = new Sala();
+        String[] nombresSala = { 
+            "Sala de Conferencias de Electronica",
+            "Salon de Usos Multiples",
+            "Laboratorio SUN"
+        };
 
-        switch (id) {
-            case 1:
-                sala.setId(1);
-                sala.setNombre("Sala de Conferencias de Electronica");
-                break;
-
-            case 2:
-                sala.setId(2);
-                sala.setNombre("Salon de Usos Multiples");
-
-            case 3:
-                sala.setId(3);
-                sala.setNombre("Laboratorio SUN");
-
-            default:
-                // No hay default según dicen
-        }
-
-        return sala;
+        return new Sala(id, nombresSala[id - 1]);
     }
 }

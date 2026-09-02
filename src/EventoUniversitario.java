@@ -25,7 +25,6 @@ public class EventoUniversitario {
         this.titulo = titulo;
         this.costoBase = costoBase;
         this.gratuito = gratuito;
-        this.sala = new Sala();
 
         /*
          * Considerando que:
@@ -35,8 +34,7 @@ public class EventoUniversitario {
          *
          * Se opta por un valor por defecto que se sobreescribirá al invocar asignarSala.
          */
-        this.sala.setId(-1);
-        this.sala.setNombre("SIN SALA");
+        this.sala = new Sala(-1, "SIN SALA");
 
         this.actividades = new Vector<>();
 
@@ -87,20 +85,16 @@ public class EventoUniversitario {
 
         // Lamentablemente no se puede hacer con switch
         if (tipo.equals("Charla")) {
-            nueva_actividad = new Charla();
+            nueva_actividad = new Charla(id, titulo, cupo, "Pepe Hongo");
         }
         else if (tipo.equals("Taller")) {
-            nueva_actividad = new Taller();
+            nueva_actividad = new Taller(id, titulo, cupo, true);
         }
         else {
             System.err.println("ERROR: INGRESADO TIPO DE ACTIVIDAD INVALIDO."
                     + " ABORTANDO CREACION DE ACTIVIDAD.");
             return;
         }
-
-        nueva_actividad.setId(id);
-        nueva_actividad.setTitulo(titulo);
-        nueva_actividad.setCupoMaximo(cupo);
 
         actividades.add(nueva_actividad);
     }
@@ -115,18 +109,21 @@ public class EventoUniversitario {
 
         for (Actividad a : actividades) {
             System.out.println(
-                    "Actividad " + a.getId() + ": " + a.getTitulo()
-                            +   "\nTipo: " + a.getTipo()
+                    "Actividad " + a.getId() + ": " + a.getTitulo() + "\nTipo: " + a.getTipo()
             );
-            if (a.getTipo().equals("Charla")) {
-                System.out.println("Disertante: " + ((Charla)a).getDisertante());
+            switch (a.getTipo()) {
+                case "Charla":
+                    System.out.println("Disertante: " + ((Charla)a).getDisertante());
+                    break;
+                case "Taller":
+                    System.out.println(
+                            "Requiere notebook: "
+                        +   (((Taller)a).getRequiereNotebook() ? "SI" : "NO" )
+                    );
+                    break;
             }
-            else if (a.getTipo().equals("Taller")) {
-                System.out.println(
-                        "Requiere notebook: "
-                                +   ( ((Taller)a).getRequiereNotebook() ? "SI" : "NO" )
-                );
-            }
+
+
             // Asumimos en este punto que no hay tipos incorrectos
 
             a.mostrarInscripciones();
@@ -158,34 +155,6 @@ public class EventoUniversitario {
         }
         System.err.println("Se ingresó un ID de actividad inválido a la hora de "
                 + "inscribir al estudiante " + estudiante.getNombre() + ".\n");
-    }
-
-    // Y otra vez...
-    public void tallerRequiereNotebook(int id_act) {
-        for (Actividad a : actividades) {
-            if (a.getId() == id_act && a.getTipo().equals("Taller")) {
-                ((Taller)a).setRequiereNotebook(true);
-                return;
-            }
-        }
-        System.err.println(
-                "Marcar requerimiento de notebook: ID invalido "
-                        +   "para taller. Abortando."
-        );
-    }
-
-    // Basta...
-    public void charlaAgregarDisertante(int id_act, String disertante) {
-        for (Actividad a : actividades) {
-            if (a.getId() == id_act && a.getTipo().equals("Charla")) {
-                ((Charla)a).setDisertante(disertante);
-                return;
-            }
-        }
-        System.err.println(
-                "Agregar disertante: ID invalido "
-                        +   "para charla. Abortando."
-        );
     }
 
     // Quite los getters/setters porque para eso están el constructor y mostrarDatos

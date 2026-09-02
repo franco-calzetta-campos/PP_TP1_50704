@@ -10,6 +10,12 @@ public abstract class Actividad {
 
     public static final int CUPO_MINIMO = 1; // idk
 
+    public Actividad(int id, String titulo, int cupoMaximo) {
+        this.id = id;
+        this.titulo = titulo;
+        this.cupoMaximo = cupoMaximo;
+    }
+
     // ABSTRACT METHODS ON TOP
     public abstract double calcularCostoMateriales();
     public abstract String getTipo();
@@ -21,12 +27,8 @@ public abstract class Actividad {
             inscripciones = new Vector<Inscripcion>();
         }
 
-        Inscripcion nueva_inscripcion = new Inscripcion();
-
-        nueva_inscripcion.setActividad(this);
-        nueva_inscripcion.setEstudiante(estudiante);
-        nueva_inscripcion.setFecha(LocalDate.now());
-        nueva_inscripcion.setEstado("INSCRITO");
+        Inscripcion nueva_inscripcion = 
+            new Inscripcion(LocalDate.now(), "INSCRITO", this, estudiante);
 
         inscripciones.add(nueva_inscripcion);
 
@@ -56,23 +58,11 @@ public abstract class Actividad {
         return this.id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getTitulo() {
         return this.titulo;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
     public int getCupoMaximo() {
         return this.cupoMaximo;
-    }
-
-    public void setCupoMaximo(int cupoMaximo) {
-        this.cupoMaximo = cupoMaximo;
     }
 }

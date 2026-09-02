@@ -8,25 +8,20 @@ void main() {
     EventoUniversitario[] eventos = StubGen.crearEventosUniversitarios();
 
     // Asignando salas a cada evento
-    eventos[0].asignarSala(StubGen.generarSala(1));
-    eventos[1].asignarSala(StubGen.generarSala(2));
-    eventos[2].asignarSala(StubGen.generarSala(3));
+    for (int i = 0; i < EventoUniversitario.getCantidadEventos(); i++) {
+        eventos[i].asignarSala(StubGen.generarSala(i + 1));
+    }
 
     // Creando actividades propias de cada evento
     eventos[0].crearActividad(1001, "Armar un Roomba con Arduino", 50, "Taller");
     eventos[0].crearActividad(1002, "Creando un home server con Arduino", 70, "Taller");
 
     eventos[1].crearActividad(2001, "Exposición de invenciones", 40, "Charla");
-    eventos[1].charlaAgregarDisertante(2001, "Pepe Marti");
     eventos[1].crearActividad(2002, "Charla final", 50, "Charla");
-    eventos[1].charlaAgregarDisertante(2002, "Pepe Marti");
 
     eventos[2].crearActividad(3001, "Onboarding", 80, "Charla");
-    eventos[2].charlaAgregarDisertante(3001, "Sacha Fenestraz");
     eventos[2].crearActividad(3002, "Sesión de trabajo", 80, "Taller");
-    eventos[2].tallerRequiereNotebook(3002);
     eventos[2].crearActividad(3003, "Exposición final", 80, "Charla");
-    eventos[2].charlaAgregarDisertante(3003, "Jose Maria Lopez");
 
     // Inscribiendo estudiantes en cada actividad
     eventos[0].inscribirEstudianteActividad(estudiantes[0], 1001);
