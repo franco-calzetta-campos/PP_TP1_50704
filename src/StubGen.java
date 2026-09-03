@@ -4,15 +4,11 @@
 
 public class StubGen {
     public static Estudiante[] crearEstudiantes() {
-        Estudiante[] estudiantes = new Estudiante[5];
-
-        estudiantes[0] = new Estudiante("Alvaro Alvarez", "50501");
-        estudiantes[0] = new Estudiante("Bernardo Beltran", "50502");
-        estudiantes[0] = new Estudiante("Camila Canales", "50503");
-        estudiantes[0] = new Estudiante("Diego D'Avalos", "50504");
-        estudiantes[0] = new Estudiante("Ernestina Estevanez", "50505");
-
-        return estudiantes;
+        return new Estudiante[] {
+            new Estudiante("50501", "Alvaro Alvarez"),
+            new Estudiante("50502", "Bernardo Beltran"),
+            new Estudiante("50503", "Camila Canales")
+        };
     }
 
     public static EventoUniversitario[] crearEventosUniversitarios() {
@@ -40,11 +36,23 @@ public class StubGen {
     }
 
     public static Sala generarSala(int id) {
+        // Podríamos validar id
+
         String[] nombresSala = { 
             "Sala de Conferencias de Electronica",
             "Salon de Usos Multiples",
             "Laboratorio SUN"
         };
+
+
+
+
+        // ...
+
+
+
+
+
 
         return new Sala(id, nombresSala[id - 1]);
     }

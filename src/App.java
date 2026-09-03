@@ -4,6 +4,10 @@ void main() {
     // Construyendo lista de estudiantes
     Estudiante[] estudiantes = StubGen.crearEstudiantes();
 
+    // Agregando estudiantes al contexto general para no vincular directamente
+    // con EventoUniversitario
+    Context.addContextVar("Estudiantes", estudiantes);
+
     // Creando eventos universitarios
     EventoUniversitario[] eventos = StubGen.crearEventosUniversitarios();
 
@@ -22,31 +26,6 @@ void main() {
     eventos[2].crearActividad(3001, "Onboarding", 80, "Charla");
     eventos[2].crearActividad(3002, "Sesión de trabajo", 80, "Taller");
     eventos[2].crearActividad(3003, "Exposición final", 80, "Charla");
-
-    // Inscribiendo estudiantes en cada actividad
-    eventos[0].inscribirEstudianteActividad(estudiantes[0], 1001);
-    eventos[0].inscribirEstudianteActividad(estudiantes[1], 1001);
-    eventos[0].inscribirEstudianteActividad(estudiantes[3], 1001);
-    eventos[0].inscribirEstudianteActividad(estudiantes[1], 1002);
-    eventos[0].inscribirEstudianteActividad(estudiantes[4], 1002);
-
-    eventos[1].inscribirEstudianteActividad(estudiantes[1], 2001);
-    eventos[1].inscribirEstudianteActividad(estudiantes[2], 2001);
-    eventos[1].inscribirEstudianteActividad(estudiantes[3], 2001);
-    eventos[1].inscribirEstudianteActividad(estudiantes[4], 2001);
-    eventos[1].inscribirEstudianteActividad(estudiantes[0], 2002);
-    eventos[1].inscribirEstudianteActividad(estudiantes[2], 2002);
-    eventos[1].inscribirEstudianteActividad(estudiantes[3], 2002);
-
-    eventos[2].inscribirEstudianteActividad(estudiantes[1], 3001);
-    eventos[2].inscribirEstudianteActividad(estudiantes[2], 3001);
-    eventos[2].inscribirEstudianteActividad(estudiantes[3], 3001);
-    eventos[2].inscribirEstudianteActividad(estudiantes[1], 3002);
-    eventos[2].inscribirEstudianteActividad(estudiantes[2], 3002);
-    eventos[2].inscribirEstudianteActividad(estudiantes[3], 3002);
-    eventos[2].inscribirEstudianteActividad(estudiantes[1], 3003);
-    eventos[2].inscribirEstudianteActividad(estudiantes[2], 3003);
-    eventos[2].inscribirEstudianteActividad(estudiantes[3], 3003);
 
     // Mostrando los datos de los eventos creados
     System.out.println("== DATOS DE EVENTOS EN BASE ==");

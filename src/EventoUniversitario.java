@@ -96,6 +96,15 @@ public class EventoUniversitario {
             return;
         }
 
+        // Hardcodeando inscripcion de estudiantes
+        Estudiante[] estudiantes = (Estudiante[])(Context.getContextVar("Estudiantes"));
+        if (estudiantes != null) {
+            // Inscribir a todos los estudiantes
+            for (Estudiante e : estudiantes) {
+                nueva_actividad.inscribir(e);
+            }
+        }
+
         actividades.add(nueva_actividad);
     }
 
@@ -134,27 +143,6 @@ public class EventoUniversitario {
 
     public static int getCantidadEventos() {
         return cantidadEventos;
-    }
-
-    /* Por las restricciones del ejercicio, me veo forzado a agregar esta
-     * funcion. No es parte del diagrama de clases, pero por como están
-     * modeladas las Actividades, están encapsuladas en EventoUniversitario, y
-     * exportar las instancias de Actividades rompe con la restricción del
-     * vínculo del ciclo de vida de las Actividades con el evento (política del
-     * GC respecto de referencias) dado que pueden sobrevivir referencias al
-     * puntero de la Actividad en instancias cuyo ciclo de vida es
-     * independiente de aquel del EventoUniversitario.
-     */
-    public void inscribirEstudianteActividad(Estudiante estudiante, int id_act) {
-        // Buscar secuencialmente, no hay otra
-        for (Actividad a : actividades) {
-            if (a.getId() == id_act) {
-                a.inscribir(estudiante);
-                return;
-            }
-        }
-        System.err.println("Se ingresó un ID de actividad inválido a la hora de "
-                + "inscribir al estudiante " + estudiante.getNombre() + ".\n");
     }
 
     // Quite los getters/setters porque para eso están el constructor y mostrarDatos
